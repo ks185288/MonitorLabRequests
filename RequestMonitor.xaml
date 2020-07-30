@@ -1,0 +1,72 @@
+﻿<Window x:Class="GlobalHakathon.RequestMonitor"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GlobalHakathon"
+        mc:Ignorable="d"
+        Title="" Height="450" Width="800">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisConverter" />
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width ="373*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+        <Label Grid.RowSpan="2" HorizontalAlignment="Center" TextBlock.FontSize="40"  Content= "Monitor Lab Request" Grid.ColumnSpan="3" />
+        <Rectangle VerticalAlignment="Top" Margin="0,0,-0.4,0" Grid.ColumnSpan="3" Height="5"
+                   Fill="Cyan" Grid.Row="1" Grid.Column="0"/>
+
+        <StackPanel Orientation="Vertical"  Grid.Row="1" Grid.Column="0" Margin="0,0,0,0.4">
+            <StackPanel Margin="0,0,10.4,0" >
+                <Button x:Name ="Button_RaiseRequest" Content="Raise Request" Height="50" Margin="10" FontSize="20" FontWeight="Bold" Click="Button_RaiseRequest_Click"/>
+                <Button x:Name ="Button_CheckStatus" Content="Check Status"   Height="50" Margin="10" FontSize="20" FontWeight="Bold" Click="Button_CheckStatus_Click"/>
+                <Button x:Name ="Button_Pending" Content="Pending Requests"   Height="50" Margin="10" FontSize="20" FontWeight="Bold" IsEnabled="{Binding ISAdmin}" Click="Button_Pending_Click"/>
+                <Button x:Name ="Button_Expired" Content="Expired Requests"   Height="50" Margin="10" FontSize="20" FontWeight="Bold" IsEnabled="{Binding ISAdmin}" Click="Button_Expired_Click"/>
+            </StackPanel>
+            <Rectangle VerticalAlignment="Bottom"  Grid.Row="1" Grid.Column="0" Height="5"
+                   Fill="Cyan" Grid.ColumnSpan="2" Margin="0,0,-590.6,0"/>
+        </StackPanel>
+        <StackPanel Grid.Column="2" Grid.Row="1" Name="CreateRequestPanel" VerticalAlignment="Center" Visibility="Collapsed" Orientation ="Vertical">
+            <local:CreateRequest/>
+        </StackPanel>
+        <StackPanel Grid.Column="2" Grid.Row="1" Name="SearchRequestPanel" Visibility="Collapsed" Orientation ="Vertical">
+            <local:CheckStatus x:Name="checkStatus"/>
+
+        </StackPanel>
+        <StackPanel Grid.Column="2" Grid.Row="1" Name="PendinRequestPanel" Visibility="Collapsed" Orientation ="Vertical">
+            <local:PendingRequest x:Name="PendingRequests"/>  
+        </StackPanel>
+
+        <StackPanel Grid.Column="2" Grid.Row="1" Name="ExpireRequestPanel" Visibility="Collapsed" Orientation ="Vertical">
+            <local:ExpiryRequests x:Name="ExpireRequests"/>
+        </StackPanel>
+
+
+        <Rectangle VerticalAlignment="Top" Margin="64,137,457.6,0" Grid.ColumnSpan="3" Height="5"
+            Fill="Black" Grid.Row="1" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90.338"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <StackPanel  HorizontalAlignment="Right" VerticalAlignment="Top" Orientation="Horizontal" Grid.Row="2" Grid.ColumnSpan="3">
+            <StackPanel Name="GobackPanel"  Visibility="Collapsed"  HorizontalAlignment="Right" VerticalAlignment="Top" Orientation="Horizontal" Grid.Row="2" Grid.ColumnSpan="3">
+                <Button Name="Submit" Content="Submit" FontSize="20" Margin=" 5" Width="99" Click="Submit_Click"/>
+                <Button Name="GoBack" Content="Go Back" FontSize="20" Margin="20,5" Width="99" Click="GoBack_Click"/>
+            </StackPanel>
+            <Button Name="LogOut" Content="LogOut" FontSize="20" Margin="20,5" Width="99" Click="LogOut_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
